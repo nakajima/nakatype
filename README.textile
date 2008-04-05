@@ -49,10 +49,17 @@ Example:
     <li><a href="#" id="hide_menu_and_show_options" class="control">Cancel</a></li>
   </ul>
 </pre>
-Note: Unfortunately, this syntax means you'll run into trouble if you have any elements
+
+*Note:* Unfortunately, this syntax means you'll run into trouble if you have any elements
 that have ids that include the substring '_and_'. To get around this problem, you can 
 disable support for multiple actions by setting the @Element.Controls.disableMultiple@ 
 option to true.
+
+h4. Aren't element controls just prettier onclicks?
+
+Not the way I see it. Sometimes, elements exist for no other reason than to control 
+other elements. And rather than hardcode specific behaviors, it's much nicer to have 
+them generated on the fly like this.
 
 h3. More to come...
 
