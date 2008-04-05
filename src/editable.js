@@ -12,7 +12,6 @@ var Editable = Class.create({
   
   parseField: function() {
     var params = new Array;
-    var string = this.element.identify();
     var levels = this.element.readAttribute('rel').replace(/(http:|https:|file:)\/\/[^\/]+/, '').split('/').without('');
     levels.each(function(level, i) { if ( i % 2 == 0 ) { params.push(level.gsub(/s$/, '')) } })
     var split = this.element.identify().split('_');
