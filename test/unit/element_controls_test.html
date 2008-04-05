@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Nakatype Unit test file :: Element Controls Test</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="../vendor/prototype.js" type="text/javascript"></script>
+  <script src="../vendor/effects.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <script src="../../src/event_delegation.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../src/element_controls.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="../test.css" type="text/css" />
+</head>
+<body>
+<h1>Nakatype Unit test file</h1>
+<div id="controls">
+  <div id="options">
+    <a href="#" id="show_menu" class="control">Show the menu</a>
+  </div>
+  <ul id="menu" style="display:none">
+    <li>Option 1</li>
+    <li>Option 2</li>
+    <li>Option 3</li>
+    <li><a href="#" id="hide_menu" class="control">Cancel</a></li>
+  </ul>
+</div>
+
+<div id="name">
+  Pat
+</div>
+
+<div id="address">
+  Nakajima
+</div>
+
+<a href="#" id="hide_name_and_hide_address" class="control">Hide names</a>
+
+<a href="#" class="control" id="remove_self">Remove Me</a>
+
+<!-- Log output -->
+<div id="testlog"> </div>
+
+<div id='elementToViewportDimensions' style='display: none'></div>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+  new Test.Unit.Runner({
+    testShouldShowTarget: function() {
+      var target = $('menu');
+      var control = $('show_menu');
+      this.assertHidden(target);
+      Event.simulateMouse(control, 'click');
+      this.assertVisible(target);
+    },
+    
+    testShouldHideTarget: function() {
+      var target = $('menu');
+      var control = $('hide_menu');
+      this.assertVisible(target);
+      Event.simulateMouse(control, 'click');
+      this.assertHidden(target);
+    },
+    
+    testShouldRemoveTargets: function() {
+      var control = $('remove_self');
+      this.assertNotNull(control);
+      Event.simulateMouse(control, 'click');
+      this.assertNull($('remove_self'));
+    },
+    
+    testShouldWorkWithDynamicallyAddedElements: function() {
+      var target = $('controls');
+      this.assertVisible(target);
+      var control = new Element('a', { 'id':'hide_controls', 'class':'control' });
+      $('menu').insert(control.wrap('li'));
+      Event.simulateMouse(control, 'click');
+      this.assertHidden(target);
+    },
+    
+    testShouldAllowMultipleCommands: function() {
+      var targets = [];
+      targets.push($('name'));
+      targets.push($('address'));
+      targets.each(this.assertVisible.bind(this));
+      var control = $('hide_name_and_hide_address');
+      Event.simulateMouse(control, 'click');
+      targets.each(this.assertHidden.bind(this));
+    }
+  })
+  
+// ]]>
+</script>
+</body>
+</html>

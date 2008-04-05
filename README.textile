@@ -1,0 +1,11 @@
+h1. Nakatype.js
+
+Prototype.js extensions.
+
+h2. Contents
+
+h3. Event Delegation
+
+h3. Form Submission Event Bubbler
+
+h3. 
