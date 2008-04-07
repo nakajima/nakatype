@@ -11,10 +11,13 @@ var Editable = Class.create({
   },
   
   parseField: function() {
-    var params = new Array;
+    var params = new Array; var values = new Array;
     var levels = this.element.readAttribute('rel').replace(/(http:|https:|file:)\/\/[^\/]+/, '').split('/').without('');
-    levels.each(function(level, i) { if ( i % 2 == 0 ) { params.push(level.gsub(/s$/, '')) } })
-    var split = this.element.identify().split('_');
+    levels.each(function(level, i) {
+      if ( i % 2 == 0 ) { params.push(level.gsub(/s$/, '')) }
+      else { values.push(level); }
+    })
+    var split = this.element.identify().split('_').reject(function(m) { return values.include(m); });
     var attrs = $A(split).select(function(m) { return params.include(m); });
     var fields = split.inject(new Array, function(memo, attr) {
       if ( attrs.include(attr) ) {
