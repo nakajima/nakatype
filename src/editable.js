@@ -29,7 +29,6 @@ var Editable = Class.create({
     })
     var fieldString = field.join('[');
     (field.length - 1).times(function() { fieldString += ']' });
-    console.info(fieldString)
     return fieldString;
   },
   
