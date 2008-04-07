@@ -1,5 +1,5 @@
 var Editable = Class.create({
-  editFieldTag: 'textarea',
+  editFieldTag: 'input',
 
   initialize: function(element, options) {
     Object.extend(this, options);
@@ -16,7 +16,7 @@ var Editable = Class.create({
     levels.each(function(level, i) { if ( i % 2 == 0 ) { params.push(level.gsub(/s$/, '')) } })
     var split = this.element.identify().split('_');
     var attrs = $A(split).select(function(m) { return params.include(m); });
-    var field = split.inject(new Array, function(memo, attr) {
+    var fields = split.inject(new Array, function(memo, attr) {
       if ( attrs.include(attr) ) {
         memo.push(attr);
         return memo;
@@ -27,33 +27,29 @@ var Editable = Class.create({
         return memo;
       }
     })
-    var fieldString = field.join('[');
-    (field.length - 1).times(function() { fieldString += ']' });
+    var fieldString = fields.join('[');
+    (fields.length - 1).times(function() { fieldString += ']' });
     return fieldString;
   },
   
   setupForm: function() {
     this.editForm = new Element('form', { 'action': this.element.readAttribute('rel'), 'style':'display:none', 'class':'editor' })
-    this.editInput = new Element(this.editFieldTag, { 'name':this.field });
-    this.editInput.update(this.element.innerHTML);
+    this.editInput = new Element(this.editFieldTag, { 'name':this.field, 'id':('edit_' + this.element.identify()) });
+    this.editInput.value = this.element.innerHTML;
     var saveInput = new Element('input', { 'type':'submit', 'value':'Save' });
     this.cancelLink = new Element('a', { 'href':'#' }); this.cancelLink.update('Cancel');
     var methodInput = new Element('input', { 'type':'hidden', 'value':'put', 'name':'_method' })
     this.editForm.insert(this.editInput);
-    this.editForm.insert(this.cancelLink);
     this.editForm.insert(saveInput);
+    this.editForm.insert(this.cancelLink);
     this.editForm.insert(methodInput);
     this.element.insert({after: this.editForm });
   },
 
   setupBehaviors: function() {
-    this.behaviors = { };
-    this.behaviors['edit'] = this.edit.bindAsEventListener(this);
-    this.behaviors['save'] = this.save.bindAsEventListener(this);
-    this.behaviors['cancel'] = this.cancel.bindAsEventListener(this);
-    this.element.observe('click', this.behaviors['edit']);
-    this.editForm.observe('submit', this.behaviors['save']);
-    this.cancelLink.observe('click', this.behaviors['cancel']);
+    this.element.observe('click', this.edit.bindAsEventListener(this));
+    this.editForm.observe('submit', this.save.bindAsEventListener(this));
+    this.cancelLink.observe('click', this.cancel.bindAsEventListener(this));
   },
 
   edit: function(event) {
@@ -75,7 +71,7 @@ var Editable = Class.create({
         var json = transport.responseText.evalJSON();
         var attr = this.field.replace(/\w+\[(\w+)\]/, '$1');
         this.value = json[attr];
-        this.editInput.update(json[attr]);
+        this.editInput.value = json[attr];
         this.element.update(json[attr]);
         form.enable();
         this.cancel();
@@ -90,7 +86,7 @@ var Editable = Class.create({
 
   cancel: function(event) {
     this.element.show();
-    this.editInput.update(this.value);
+    this.editInput.value = this.value;
     this.editForm.hide();
     event.stop();
   }
@@ -99,7 +95,11 @@ var Editable = Class.create({
 Object.extend(Editable, {
   create: function(element) {
     new Editable(element);
+  },
+  
+  setupAll: function() {
+    $$('.editable').each(Editable.create);
   }
 })
 
-$$('.editable').each(Editable.create);
+Event.observe(document, 'dom:loaded', Editable.setupAll)
