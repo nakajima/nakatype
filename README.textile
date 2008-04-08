@@ -18,7 +18,7 @@ See "this blog post":http://devthatweb.com/view/basic-event-delegation-in-protot
 
 h3. Classy Controls
 
-
+See the "Classy Controls wiki page":http://github.com/nakajima/nakatype/wikis/classy-controls-classy-js for more information.
 
 © 2008 Pat Nakajima
 
