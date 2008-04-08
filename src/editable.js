@@ -1,3 +1,5 @@
+// Editable: Better in-place-editing
+// http://github.com/nakajima/nakatype/wikis/better-edit-in-place-editable-js
 var Editable = Class.create({
   editFieldTag: 'input',
 
