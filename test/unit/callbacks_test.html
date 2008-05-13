@@ -7,6 +7,7 @@
   <script src="../vendor/prototype.js" type="text/javascript"></script>
   <script src="../lib/unittest.js" type="text/javascript"></script>
   <script src="../../src/callbacks.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../src/logger.js" type="text/javascript" charset="utf-8"></script>
   <link rel="stylesheet" href="../test.css" type="text/css" />
 </head>
 <body>
@@ -141,7 +142,7 @@ new Test.Unit.Runner({
     this.assert(!pat.history.include('just set age to 37'));
     this.assert(!pat.history.include('just set name to Dude'))
     
-    Callbacks.reset(pat, 'setName');
+    Callbacks.reset('setName', pat);
     
     pat.setAge(37);
     this.assertEqual(37, pat.getAge());

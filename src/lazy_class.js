@@ -21,21 +21,25 @@ var LazyClass = Class.create({
   }
 });
 
+LazyClass.makeLazyClass = function(subclass) {
+  Callbacks.set(subclass, {
+    after: {
+      addMethods: function(){
+        subclass.prototype.initialize = subclass.prototype.initialize.wrap(function(proceed) {
+          var args = $A(arguments).slice(1);
+          var result = proceed.apply(this, args);
+          this.makeLazy();
+          return result;
+        })
+      }
+    }
+  })
+}
+
 Callbacks.set(LazyClass.subclasses, {
   before: {
     push: function(subclass) {
-      Callbacks.set(subclass, {
-        after: {
-          addMethods: function(){
-            subclass.prototype.initialize = subclass.prototype.initialize.wrap(function(proceed) {
-              var args = $A(arguments).slice(1);
-              var result = proceed.apply(this, args);
-              this.makeLazy();
-              return result;
-            })
-          }
-        }
-      })
+      LazyClass.makeLazyClass(subclass)
     }
   }
 });
