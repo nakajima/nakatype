@@ -22,12 +22,6 @@
 
 <!-- Tests follow -->
 <script type="text/javascript" language="javascript" charset="utf-8">
-var TestHelper = {
-  sendTest: function(test) {
-    test.bind(this).call();
-  }
-}
-
 var Person = Class.create({
   initialize: function(name, age) {
     this.setName(name);
