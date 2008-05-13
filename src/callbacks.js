@@ -31,7 +31,7 @@ Callbacks = {
           
           beforeCallbacks.each(runCallback.curry(args));
           var result = proceed.apply(this, args);
-          afterCallbacks.each(runCallback.curry(args));
+          if (result != false) { afterCallbacks.each(runCallback.curry(args)); }          
           
           return result;
         } else {
