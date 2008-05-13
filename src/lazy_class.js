@@ -9,7 +9,11 @@ var LazyClass = Class.create({
 
     var makeLazyMethod = function(method) {
       this.methodCache[method] = this[method];
-      return this[method] = this.handleMethod.curry(method);
+      this[method] = this.handleMethod.curry(method);
+      Object.extend(this[method], {
+        valueOf: function() { return this.methodCache[method] }.bind(this),
+        toString: function() { return this.methodCache[method].toString(); }.bind(this)
+      })
     }.bind(this);
 
     this.methods.each(makeLazyMethod);
