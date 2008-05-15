@@ -7,12 +7,7 @@
   var HashWatcher = {
     CURRENT: null,
     INTERVAL: 0.2,
-
-    start: function() {
-      
-      new PeriodicalExecuter(HashWatcher.check, HashWatcher.INTERVAL);
-    },
-
+    
     check: function(pe) {
       var hash = window.location.href.split('#')[1];
       if (HashWatcher.CURRENT != hash) {
@@ -22,5 +17,5 @@
     }
   };
   
-  HashWatcher.start();
+  new PeriodicalExecuter(HashWatcher.check, HashWatcher.INTERVAL);
 })();
