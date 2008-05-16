@@ -4,21 +4,29 @@ Prototype.js extensions.
 
 h2. Contents
 
-h3. Better Edit in Place
+h3. "Custom event for hash:changed":http://github.com/nakajima/nakatype/wikis/custom-event-for-hash-changed
 
-See the "Better Edit in Place wiki page":http://github.com/nakajima/nakatype/wikis/better-edit-in-place-editable-js for more information.
+Fires a custom Prototype event named @hash:changed@ when the window location hash fragment changes.
 
-h3. Element Controls
+h3. "Better Edit in Place":http://github.com/nakajima/nakatype/wikis/better-edit-in-place-editable-js
 
-See the "Element Controls wiki page":http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js for more information.
+A better edit in place script than the standard script.aculo.us solution.
+
+h3. "Element controls":http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
+
+Create elements that control elements.
+
+h3. "Classy Controls":http://github.com/nakajima/nakatype/wikis/classy-controls-classy-js
+
+Simple class-based behaviors.
+
+h3. "Callbacks":http://github.com/nakajima/nakatype/wikis/callbacks
+
+Add before/after callbacks for any method for any object.
 
 h3. Event Delegation & Form Submission Event Bubbling Simulator
 
 See "this blog post":http://devthatweb.com/view/basic-event-delegation-in-prototype for more info on these.
-
-h3. Classy Controls
-
-See the "Classy Controls wiki page":http://github.com/nakajima/nakatype/wikis/classy-controls-classy-js for more information.
 
 © 2008 Pat Nakajima
 
