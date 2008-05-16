@@ -9,7 +9,7 @@
     INTERVAL: 0.2,
     
     check: function(pe) {
-      var hash = window.location.href.split('#')[1];
+      var hash = window.location.hash;
       if (HashWatcher.CURRENT != hash) {
         document.fire('hash:changed', { currentHash: hash });
         HashWatcher.CURRENT = hash;

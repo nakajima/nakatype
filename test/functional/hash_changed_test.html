@@ -16,7 +16,7 @@
       var hash = event.memo['currentHash'];
       
       $('currentHash').update(hash);
-      $('currentHash').setStyle('background: ' + hash);
+      $('currentHash').setStyle('background: ' + hash.replace('#', ''));
       
       var li = new Element('li').update('Hash changed to ' + hash);
       $('changeLog').insert(li);
