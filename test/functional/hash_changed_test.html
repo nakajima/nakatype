@@ -15,7 +15,7 @@
     Event.observe(document, 'hash:changed', function(event) {
       var hash = event.memo['currentHash'];
       
-      $('currentHash').update(hash.capitalize());
+      $('currentHash').update(hash);
       $('currentHash').setStyle('background: ' + hash);
       
       var li = new Element('li').update('Hash changed to ' + hash);
