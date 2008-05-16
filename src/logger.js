@@ -1,13 +1,12 @@
 // Logs messages using either the browser's built-in console,
 // or alerts messages with level, if the browser doesn't support
-// that level of logging.
+// that type of logging.
 var logger = (function() {
   function say(message, level) {
-    if (console && console[level]) {
-      return console[level](message);
-    } else {
-      alert(level.toUpperCase() + ': ' + message)
-    }
+    Try.these(
+      function() { console[level](message) },
+      function() { alert(level.toUpperCase() + ': ' + message) }      
+    )
   };
   
   return {
