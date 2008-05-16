@@ -37,13 +37,16 @@ LazyClass.makeLazyClass = function(subclass) {
         })
       }
     }
-  })
+  });
 }
+  
+LazyClass.inherited = function(subclass) {
+  LazyClass.makeLazyClass(subclass);
+}
+
 
 Callbacks.set(LazyClass.subclasses, {
   before: {
-    push: function(subclass) {
-      LazyClass.makeLazyClass(subclass)
-    }
+    push: LazyClass.inherited
   }
 });
