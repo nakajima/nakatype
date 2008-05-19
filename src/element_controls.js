@@ -1,5 +1,5 @@
-// Element Controls
-// http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
+// Element Controls: Control elements with other elements.
+// See http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
 Element.addMethods({
   Controls: {
     disableMultiple: false,
