@@ -9,6 +9,7 @@ Object.extend(Array.prototype, {
     return values.sum() / values.length;
   },
   
+  // TODO This might not be the most efficient algorithm.
   shuffle: function() {
     return this.sortBy(Math.random);
   }
