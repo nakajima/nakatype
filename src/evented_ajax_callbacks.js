@@ -1,3 +1,7 @@
+// Fires events for main AJAX request callbacks. Not quite sure
+// why this would be better than just using regular Ajax.Responder
+// stuff. Maybe it would allow for some more modular code? We'll see.
+// Note: This is rather untested.
 (function() {
   var fireEvent = function(name) {
     var args = $A(arguments).slice(1);
