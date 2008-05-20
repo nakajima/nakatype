@@ -3,10 +3,9 @@
 // that type of logging.
 var logger = (function() {
   function say(message, level) {
-    Try.these(
-      function() { console[level](message) },
-      function() { alert(level.toUpperCase() + ': ' + message) }      
-    )
+    (console && console[level])
+      ? console[level](message)
+      : alert(level.toUpperCase() + ': ' + message);
   };
   
   return {
