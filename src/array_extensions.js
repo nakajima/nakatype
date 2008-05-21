@@ -13,4 +13,4 @@ Object.extend(Array.prototype, {
   shuffle: function() {
     return this.sortBy(Math.random);
   }
-})
+});

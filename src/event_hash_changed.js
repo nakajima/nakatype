@@ -13,7 +13,7 @@
       if (HashWatcher.CURRENT != hash) {
         document.fire('hash:changed', { currentHash: hash });
         HashWatcher.CURRENT = hash;
-      };
+      }
     }
   };
   

@@ -14,11 +14,11 @@ Event.observe(document, 'dom:loaded', function() {
       // TODO: Use event delegation for this.
       findForms: function() {
         Classy.Validator.forms = $$('.required').pluck('form').uniq();
-        Classy.Validator.forms.invoke('observe', 'submit', Classy.Validator.performCheck)
+        Classy.Validator.forms.invoke('observe', 'submit', Classy.Validator.performCheck);
       },
 
       performCheck: function(event) {
-        function isBlank(element) { return $F(element).blank(); };      
+        function isBlank(element) { return $F(element).blank(); }     
         var form = event.element();
         var requiredInputs = form.select('.required');
         if ( requiredInputs.any(isBlank) ) {
@@ -91,7 +91,7 @@ Event.observe(document, 'dom:loaded', function() {
         else { this.element.addClassName('hasContent'); }
       }
     })
-  })
+  });
 
   Classy.Validator.findForms();
   Classy.Confirmable.setup();

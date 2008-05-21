@@ -2,27 +2,29 @@
 // or alerts messages with level, if the browser doesn't support
 // that type of logging.
 var logger = (function() {
-  function say(message, level) {
-    (console && console[level])
-      ? console[level](message)
-      : alert(level.toUpperCase() + ': ' + message);
+  var say = function(message, level) {
+    if (console && console[level]) {
+      console[level](message);
+    } else {
+      alert(level.toUpperCase() + ': ' + message);
+    }
   };
   
   return {
     debug: function(message) {
-      return say(message, 'debug')
+      return say(message, 'debug');
     },
 
     info: function(message) {
-      return say(message, 'info')
+      return say(message, 'info');
     },
 
     warn: function(message) {
-      return say(message, 'warn')
+      return say(message, 'warn');
     },
     
     error: function(message) {
-      return say(message, 'error')
+      return say(message, 'error');
     }
-  }  
-})()
+  };
+})();

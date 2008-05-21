@@ -4,13 +4,13 @@ Callbacks = {
   set: function(receiver, _callbacks) {
     if ( !receiver.callbackCache ) {
       receiver.callbackCache = { };
-      if ( !document.objectsWithCallbacks[receiver] ) { document.objectsWithCallbacks.push(receiver) }
+      if ( !document.objectsWithCallbacks[receiver] ) { document.objectsWithCallbacks.push(receiver); }
       return Callbacks.set(receiver, _callbacks);
-    };
+    }
     
     // Sets up callbackCache for a method.
     var prepareForCallbacks = function(_method) {
-      if ( this.callbackCache[_method] ) { return true; };
+      if ( this.callbackCache[_method] ) { return true; }
       this.callbackCache[_method] = { before: new Array, after: new Array };
 
       this[(_method + 'WithoutCallbacks')] = Prototype.K(this[_method]);
@@ -26,7 +26,7 @@ Callbacks = {
           var afterCallbacks  = this.callbackCache[_method]['after'];
           
           var runCallback = function(_args, _callback) {
-            return _callback.apply(this, _args)
+            return _callback.apply(this, _args);
           }.bind(this);
           
           beforeCallbacks.each(runCallback.curry(args));
@@ -37,7 +37,7 @@ Callbacks = {
         } else {
           return proceed.apply(this, args);
         }
-      }.bind(this))
+      }.bind(this));
 
       this[_method] = this[_method].wrap(_wrapper);
     }.bind(receiver);
@@ -54,7 +54,7 @@ Callbacks = {
       var args = $A(position, _methodName, _handler);
       prepareForCallbacks(_methodName);
       appendCallbackToChain(position, _methodName, _handler);
-    }.bind(receiver)
+    }.bind(receiver);
 
     $H(_callbacks['before']).each(processCallback.curry('before'));
     $H(_callbacks['after']).each(processCallback.curry('after'));
@@ -64,15 +64,15 @@ Callbacks = {
     var stripCallbacks = function(method, receiver) {
       if ( receiver.callbackCache ) {
         receiver.callbackCache[method] = { before: new Array, after: new Array };
-      };      
-    }
-    
-    if (_receiver && _method) { stripCallbacks(_method, _receiver); return }
-    if (_method && !_receiver) { document.objectsWithCallbacks.each(stripCallbacks.curry(_method)); return }
-    if (!_method && !_receiver) {
-      document.objectsWithCallbacks.each(function(o) { o.callbackCache = { } }); return
+      }
     };
+    
+    if (_receiver && _method) { stripCallbacks(_method, _receiver); return; }
+    if (_method && !_receiver) { document.objectsWithCallbacks.each(stripCallbacks.curry(_method)); return; }
+    if (!_method && !_receiver) {
+      document.objectsWithCallbacks.each(function(o) { o.callbackCache = { }; }); return;
+    }
   }
 };
 
-Callbacks.add = Callbacks.set
+Callbacks.add = Callbacks.set;

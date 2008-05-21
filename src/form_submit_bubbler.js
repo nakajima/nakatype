@@ -4,12 +4,12 @@
 var Bubbler = {
   submittableInput: function(element) {
     var element = $(element);
-    return ( element.match('input[type=text]') || element.match('input[type=password]') )
+    return ( element.match('input[type=text]') || element.match('input[type=password]') );
   },
 
   submitButton: function(element) {
     var element = $(element);
-    return ( element.match('input[type=submit]') || element.match('input[type=image]') )
+    return ( element.match('input[type=submit]') || element.match('input[type=image]') );
   },
 
   Behaviors: {        
@@ -29,7 +29,7 @@ var Bubbler = {
       }
     }
   }
-}
+};
 
-Event.observe(document, 'keypress', Bubbler.Behaviors.keypress)    
-Event.observe(document, 'click', Bubbler.Behaviors.click)
+Event.observe(document, 'keypress', Bubbler.Behaviors.keypress);
+Event.observe(document, 'click', Bubbler.Behaviors.click);

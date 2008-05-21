@@ -12,17 +12,17 @@ Element.addMethods({
         if ( target[method] ) {
           target[method].apply(target);
           event.stop();
-        };      
+        }
       }
 
       var element = event.element();
-      var elementID = element.identify()
+      var elementID = element.identify();
       var commands = Element.Controls.disableMultiple ? [elementID] : elementID.split('_and_');
       return commands.map(attempt);
     }
   }
-})
+});
 
 Event.observe(document, 'dom:loaded', function() {
   $$('body')[0].delegators('click', { '.control': Element.Controls.click });
-})
+});
