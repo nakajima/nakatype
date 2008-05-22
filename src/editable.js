@@ -12,6 +12,7 @@ var Editable = Class.create({
     this.setupBehaviors();
   },
   
+  // Tries to make a good guess at model/attribute names.
   parseField: function() {
     var params = new Array; var values = new Array;
     var levels = this.element.readAttribute('rel').replace(/(http:|https:|file:)\/\/[^\/]+/, '').split('/').without('');

@@ -1,9 +1,10 @@
 // Element Controls
 // http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
-Element.addMethods({
-  Controls: {
+
+(function() {
+  Element.Controls = {
     disableMultiple: false,
-    
+
     click: function(event) {
       function attempt(command) {
         var matches = command.match(/([a-zA-Z]+)_(\w+)/);
@@ -21,8 +22,8 @@ Element.addMethods({
       return commands.map(attempt);
     }
   }
-})
 
-Event.observe(document, 'dom:loaded', function() {
-  $$('body')[0].delegators('click', { '.control': Element.Controls.click });
-})
+  Event.observe(document, 'dom:loaded', function() {
+    $$('body')[0].delegators('click', { '.control': Element.Controls.click });
+  })
+})();
