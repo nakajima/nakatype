@@ -1,6 +1,5 @@
-// Element Controls
-// http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
-
+// Element Controls: Control elements with other elements.
+// See http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
 (function() {
   Element.Controls = {
     disableMultiple: false,
@@ -13,11 +12,11 @@
         if ( target[method] ) {
           target[method].apply(target);
           event.stop();
-        };      
+        }
       }
 
       var element = event.element();
-      var elementID = element.identify()
+      var elementID = element.identify();
       var commands = Element.Controls.disableMultiple ? [elementID] : elementID.split('_and_');
       return commands.map(attempt);
     }

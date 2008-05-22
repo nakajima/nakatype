@@ -18,14 +18,14 @@ var Benchmark = {
   measure: function(fn) {
     var name = 'benchmark function';
     var tests = $A(arguments).slice(1)[0] || 1;
-    console.time(name)
-    tests.times(fn)
-    console.timeEnd(name)
+    console.time(name);
+    tests.times(fn);
+    console.timeEnd(name);
   }
 };
 
 (function() {
   if (!(console && console.time && console.timeEnd)) {
     Benchmark.measure = function() { throw('Firebug not found!'); };
-  };
-})()
+  }
+})();

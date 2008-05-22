@@ -11,9 +11,9 @@ var LazyClass = Class.create({
       this.methodCache[method] = this[method];
       this[method] = this.handleMethod.curry(method);
       Object.extend(this[method], {
-        valueOf: function() { return this.methodCache[method] }.bind(this),
+        valueOf: function() { return this.methodCache[method]; }.bind(this),
         toString: function() { return this.methodCache[method].toString(); }.bind(this)
-      })
+      });
     }.bind(this);
 
     this.methods.each(makeLazyMethod);
@@ -34,16 +34,19 @@ LazyClass.makeLazyClass = function(subclass) {
           var result = proceed.apply(this, args);
           this.makeLazy();
           return result;
-        })
+        });
       }
     }
-  })
-}
+  });
+};
+  
+LazyClass.inherited = function(subclass) {
+  LazyClass.makeLazyClass(subclass);
+};
+
 
 Callbacks.set(LazyClass.subclasses, {
   before: {
-    push: function(subclass) {
-      LazyClass.makeLazyClass(subclass)
-    }
+    push: LazyClass.inherited
   }
 });

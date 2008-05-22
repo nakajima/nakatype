@@ -17,9 +17,9 @@ var Editable = Class.create({
     var params = new Array; var values = new Array;
     var levels = this.element.readAttribute('rel').replace(/(http:|https:|file:)\/\/[^\/]+/, '').split('/').without('');
     levels.each(function(level, i) {
-      if ( i % 2 == 0 ) { params.push(level.gsub(/s$/, '')) }
+      if ( i % 2 == 0 ) { params.push(level.gsub(/s$/, '')); }
       else { values.push(level); }
-    })
+    });
     var split = this.element.identify().split('_').reject(function(m) { return values.include(m); });
     var attrs = $A(split).select(function(m) { return params.include(m); });
     var fields = split.inject(new Array, function(memo, attr) {
@@ -29,22 +29,22 @@ var Editable = Class.create({
       } else {
         if ( !attrs.include(memo.last()) || attr == 'id' ) {
           memo[memo.length - 1] += '_' + attr;
-        } else { memo.push(attr) }
+        } else { memo.push(attr); }
         return memo;
       }
-    })
+    });
     var fieldString = fields.join('[');
-    (fields.length - 1).times(function() { fieldString += ']' });
+    (fields.length - 1).times(function() { fieldString += ']'; });
     return fieldString;
   },
   
   setupForm: function() {
-    this.editForm = new Element('form', { 'action': this.element.readAttribute('rel'), 'style':'display:none', 'class':'editor' })
+    this.editForm = new Element('form', { 'action': this.element.readAttribute('rel'), 'style':'display:none', 'class':'editor' });
     this.editInput = new Element(this.editFieldTag, { 'name':this.field, 'id':('edit_' + this.element.identify()) });
     this.editInput.value = this.element.innerHTML;
     var saveInput = new Element('input', { 'type':'submit', 'value':'Save' });
     this.cancelLink = new Element('a', { 'href':'#' }); this.cancelLink.update('Cancel');
-    var methodInput = new Element('input', { 'type':'hidden', 'value':'put', 'name':'_method' })
+    var methodInput = new Element('input', { 'type':'hidden', 'value':'put', 'name':'_method' });
     this.editForm.insert(this.editInput);
     this.editForm.insert(saveInput);
     this.editForm.insert(this.cancelLink);
@@ -86,7 +86,7 @@ var Editable = Class.create({
         this.cancel();
         alert("Your change could not be saved.");
       }.bind(this)
-    })
+    });
     event.stop();
   },
 
@@ -96,7 +96,7 @@ var Editable = Class.create({
     this.editForm.hide();
     event.stop();
   }
-})
+});
 
 Object.extend(Editable, {
   create: function(element) {
@@ -106,6 +106,6 @@ Object.extend(Editable, {
   setupAll: function() {
     $$('.editable').each(Editable.create);
   }
-})
+});
 
-Event.observe(document, 'dom:loaded', Editable.setupAll)
+Event.observe(document, 'dom:loaded', Editable.setupAll);

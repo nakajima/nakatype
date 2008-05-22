@@ -4,6 +4,10 @@ Prototype.js extensions.
 
 h2. Contents
 
+h3. "Benchmark.js":http://github.com/nakajima/nakatype/wikis/benchmark-js
+
+Ruby-esque benchmarking with Firebug.
+
 h3. "Custom event for hash:changed":http://github.com/nakajima/nakatype/wikis/custom-event-for-hash-changed
 
 Fires a custom Prototype event named @hash:changed@ when the window location hash fragment changes.

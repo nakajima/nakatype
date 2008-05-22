@@ -13,6 +13,6 @@ Object.extend(Number.prototype, {
   
   // Bytes to kilobytes
   kilobytes: function() {
-    return Math.ceil(this / 1000)
+    return Math.ceil(this / 1000);
   }
-})
+});

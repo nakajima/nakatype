@@ -63,6 +63,23 @@ new Test.Unit.Runner({
     pat.setAge(22);
     this.assertEqual('Dude', pat.getName());
     this.assertEqual(22, pat.getAge())
+  },
+  
+  testShouldHaveMethodsArray: function() {
+    var pat = new Person('Pat', 21);
+    this.assertNotNull(pat.methods);
+    this.assert(pat.methods.include('getName'));
+    this.assert(pat.methods.include('getAge'));
+    this.assert(pat.methods.include('setName'));
+    this.assert(pat.methods.include('setAge'));
+  },
+  
+  testMethodsArrayShouldntHaveDefaults: function() {
+    var pat = new Person('Pat', 21);
+    this.assert(!pat.methods.include('initialize'));
+    this.assert(!pat.methods.include('constructor'));
+    this.assert(!pat.methods.include('handleMethod'));
+    this.assert(!pat.methods.include('makeLazy'));
   }
 });
   
