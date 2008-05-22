@@ -18,7 +18,7 @@ Object.extend(String.prototype, {
 
   // Capitalizes the first letter of each word in string.
   titleize: function() {
-    var words = this.toLowerCase().gsub(/\W|\_/, ' ').split(/\s+/);
+    var words = this.toLowerCase().gsub(/[^a-zA-Z0-9\,\.\!\?]/, ' ').split(/\s+/);
     return $A(words).invoke('capitalize').join(' ');
   },
   
