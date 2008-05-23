@@ -3,12 +3,14 @@ Object.extend(Number.prototype, {
   // Seconds to a more readable format: 0:12 or something like that.
   toDuration: function() {
     var seconds = this + 0;
-    h = parseInt(seconds / 3600);
-    m = parseInt((seconds % 3600) / 60);
-    s = parseInt(seconds % 60).toPaddedString(2);
-    var resultString = '';
-    resultString = resultString + (m + ':' + s);
-    return (h > 0) ? (h + ':' + resultString) : resultString;
+    var h = parseInt(seconds / 3600);
+    var m = parseInt((seconds % 3600) / 60);
+    var s = parseInt(seconds % 60).toPaddedString(2);
+    m = (h > 0) ? m.toPaddedString(2) : m;    
+    var resultString = (m + ':' + s);
+        
+    if (h > 0) { resultString = h + ':' + resultString; }
+    return resultString;
   },
   
   // Bytes to kilobytes
