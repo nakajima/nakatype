@@ -16,11 +16,13 @@ var Timer = Class.create({
     this.options = $A(args)[2] || { };
     this.options.afterStart = this.options.afterStart || Prototype.emptyFunction;
     this.options.afterPause = this.options.afterPause || Prototype.emptyFunction;
+    this.options.onComplete = this.options.onComplete || Prototype.emptyFunction;
   },
   
   perform: function() {
     var result = this.handler(this.seconds);
     this.seconds -= 1;
+    if (this.seconds < 0) { this.finish(); }
     return result;
   },
   
@@ -33,6 +35,12 @@ var Timer = Class.create({
     clearInterval(this._id);
     this._id = null;
     this.options.afterPause(this.seconds);
+  },
+  
+  finish: function() {
+    clearInterval(this._id);
+    this.options.onComplete();
+    delete(this);
   },
   
   isRunning: function() {

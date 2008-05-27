@@ -23,9 +23,10 @@
         $('log').insert(li);
       };
       
-      t = new Timer(600, timerHandler, {
+      t = new Timer(60, timerHandler, {
         afterStart: toggleControls,
-        afterPause: toggleControls
+        afterPause: toggleControls,
+        onComplete: function() { $$('body')[0].setStyle('background: black; color: white') }
       });
       
       var toggleTimer = function(event) {
