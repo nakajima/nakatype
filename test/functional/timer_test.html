@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Timer Test</title>
+	<style type="text/css" media="screen">
+	  body { font-family: Helvetica, Arial, sans-serif; }
+	</style>
+	<script src="../vendor/prototype.js" type="text/javascript"></script>
+  <script src="../../src/timer.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../src/number_extensions.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    Event.observe(document, 'dom:loaded', function() {
+      var timerHandler = function(sec) {
+        $('time').update(sec.toDuration());
+      };
+      
+      var toggleControls = function(sec) {
+        $('start', 'pause').invoke('toggle');
+        var li = new Element('li').update('Timer status changed at: ' + sec.toDuration());
+        $('log').insert(li);
+      };
+      
+      t = new Timer(600, timerHandler, {
+        afterStart: toggleControls,
+        afterPause: toggleControls
+      });
+      
+      var toggleTimer = function(event) {
+        event.stop();
+        t.isRunning() ? t.pause() : t.start();
+      };
+      
+      $('start', 'pause').invoke('observe', 'click', toggleTimer);
+    });
+  </script>
+</head>
+<body>
+
+  <h1>Timer Test</h1>
+  
+  <h2>Current Time: <span id="time">n/a</span></h2>
+  
+  <a href="#" id="start" style="display:none;">Start</a>
+  <a href="#" id="pause">Pause</a>
+  
+  <ul id="log"></ul>
+  
+</body>
+</html>
