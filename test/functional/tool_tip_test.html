@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Tool Tip Test</title>
+	<style type="text/css" media="screen">
+	  body { font-family: Helvetica, Arial, sans-serif; font-size: 24px; }
+	  
+	  .hint {
+      position: absolute;
+      padding: 0.4em;
+      font-size: 12px;
+      background: #fff;
+      width: auto;
+      max-width: 400px;
+      color: #333;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #cfcfcf;
+    }
+	</style>
+	<script src="../vendor/prototype.js" type="text/javascript"></script>
+	<script src="../vendor/effects.js" type="text/javascript"></script>
+  <script src="../../src/benchmark.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../src/tool_tips.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    Event.observe(document, 'dom:loaded', function() {
+      // Some test code
+      $('testElements').tipSection({ });
+    });
+  </script>
+</head>
+<body>
+
+  <h1>Tool Tip Test</h1>
+  
+  <h2>Hover over one of the links.</h2>
+  
+  <ul id="testElements">
+    <li><a href="#red" title="This is the red link">Red</a></li>
+    <li><a href="#green" title="This is the green link">Green</a></li>
+    <li><a href="#blue" title="This is the blue link">Blue</a></li>
+    <li><a href="#purple" title="This is the purple link">Purple</a></li>
+    <li><a href="#orange" title="This is the orange link">Orange</a></li>
+    <li><a href="#cyan" title="This is the cyan link">Cyan</a></li>
+  </ul>
+  
+</body>
+</html>
