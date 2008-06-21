@@ -5,7 +5,9 @@
 // adds the class name "hint" to tooltip elements, so they can be styled via CSS.
 var HelpHint = Class.create({
   delay: 200, // Time to wait before display tooltip
+  offset: 5, // Distance to offset tooltip from mouse pointer
   bindToMouse: true, // The tooltip element moves with the mouse
+  elementCursor: 'pointer', // I think it's ugly to have the text selector for a tooltip.
   
   initialize: function(element, options) {
     this.on = false;
@@ -16,7 +18,7 @@ var HelpHint = Class.create({
     if ( this.text == null || this.text.blank() ) { this.text = "<span class='nil'>(no information provided)</span>"; }
     this.setupHint();
     this.setupBehaviors();
-    this.element.setStyle({ cursor: 'pointer' });
+    if ( this.elementCursor ) { this.element.setStyle({ cursor: this.elementCursor }); }
   },
    
   setupHint: function() {
@@ -24,7 +26,7 @@ var HelpHint = Class.create({
     this.element.addClassName('hasHint');
     this.tip = new Element('div', { 'class': 'hint', 'style': 'display:none' });
     this.tip.update(this.text);
-    $$('body')[0].insert({ top:this.tip });
+    $(document.body).insert({ top:this.tip });
     this.tip.absolutize();
   },
   
@@ -58,9 +60,10 @@ var HelpHint = Class.create({
   show: function(event) {
     if (!this.on) {
       this.behaviors['observeMove'](true);
+      var pointer = event.pointer();
       this.tip.setStyle({
-        top: (event.pointerY() + 5) + 'px',
-        left: (event.pointerX() + 5) + 'px'
+        top: (pointer.y + this.offset) + 'px',
+        left: (pointer.x + this.offset) + 'px'
       });
       
       this.timeout = window.setTimeout(this.behaviors['appear'], this.delay);
@@ -72,11 +75,9 @@ var HelpHint = Class.create({
       this.appearFX.cancel();
       this.behaviors['observeMove'](false);
       this.behaviors['fade']();
-      // this.tip.remove();
     }
     
     HelpHint._clearTimeout(this.timeout);
-    
     this.on = false;
   },
   
@@ -87,9 +88,10 @@ var HelpHint = Class.create({
   },
   
   move: function(event) {
+    var pointer = event.pointer();
     this.tip.setStyle({
-      top: (event.pointerY() + 5) + 'px',
-      left: (event.pointerX() + 5) + 'px'
+      top: (pointer.y + this.offset) + 'px',
+      left: (pointer.x + this.offset) + 'px'
     });
   }
 });
@@ -109,7 +111,7 @@ Object.extend(HelpHint, {
 });
 
 Element.addMethods({
-  // Adds tool-tip behavior to the element.
+  // Adds tooltip behavior to the element.
   makeToolTip: function(element, options) {
     element = $(element);
     options = options || { };
@@ -118,7 +120,7 @@ Element.addMethods({
   },
   
   // Useful if you have an element that contains a collection of elements
-  // with tool tips.
+  // with tooltips.
   tipSection: function(element, options) {
     var options = options || { };
     var element = $(element);
