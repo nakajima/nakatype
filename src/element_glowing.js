@@ -2,14 +2,18 @@ var GlowingElement = Class.create({
   glowColor: '#fff', // Element glows to this color
   afterGlow: .2, // Delay before element fades back to original color
   glowSpeed: .2, // Duration of glow transition
-  fadeSpeed: .7, // Duration of de-glow transition
+  fadeSpeed: .4, // Duration of de-glow transition
+  illumination: 8,
   
   initialize: function(element, options) {
     this.element = $(element);
     this.options = options || { };
     Object.extend(this, options);
     this.originalColor = this.element.getStyle('color');
-    this.element.setStyle('color: ' + this.originalColor);
+    this.element.setStyle({
+      textShadow: '0px 0px 0px #fff',
+      color: this.originalColor
+    });
     this.setupBehaviors();
   },
 
@@ -20,12 +24,29 @@ var GlowingElement = Class.create({
     this.behaviors['fade'] = this.fade.bind(this);
     this.element.observe('mouse:enter', this.behaviors['start']);
     this.element.observe('mouse:leave', this.behaviors['stop']);
+    
+    this.behaviors['illuminate'] = (function(target) {
+      return function(i) {
+        target.element.setStyle('text-shadow: 0px 0px ' + (target.illumination * i) + 'px #aaaaaa');
+        return i;
+      }
+    })(this);
+    
+    this.behaviors['deluminate'] = (function(target) {
+      return function(i) {
+        target.element.style['text-shadow'] = '0px 0px ' + (target.illumination - (target.illumination * i)) + 'px #aaaaaa';
+        // target.element.setStyle('text-shadow: 0px 0px ' + (target.illumination - (target.illumination * i)) + 'px #aaaaaa');
+        return i;
+      }
+    })(this);
   },
   
   start: function() {
-    this.effect = new Effect.Morph(this.element, {
-      style: { color: this.glowColor },
+    new Effect.Morph(this.element, {
+      style: { color: this.glowColor, textShadow: '4px' },
       duration: this.glowSpeed,
+      transition: this.behaviors['illuminate'],
+      fps: 30,
       afterFinish: function() {
         this.element.addClassName('glowing');
         delete(this.effect);
@@ -43,7 +64,9 @@ var GlowingElement = Class.create({
     this.effect = new Effect.Morph(this.element, {
       style: { color: this.originalColor },
       duration: this.fadeSpeed,
+      transition: this.behaviors['deluminate'],
       queue: 'front',
+      fps: 90,
       afterFinish: function() {
         this.element.removeClassName('glowing');
         delete(this.effect);
