@@ -54,7 +54,6 @@ var GlowingElement = Class.create({
 
 Element.addMethods({
   addGlow: function(element, options) {
-    element = $(element);
     new GlowingElement(element, options);
     return element;
   }
