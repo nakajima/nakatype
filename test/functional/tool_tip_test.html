@@ -8,6 +8,8 @@
 	<style type="text/css" media="screen">
 	  body { font-family: Helvetica, Arial, sans-serif; font-size: 24px; }
 	  
+	  h1 { margin-top: 0.1em; }
+	  
 	  .hint {
       position: absolute;
       padding: 0.4em;
@@ -28,7 +30,8 @@
   <script type="text/javascript" charset="utf-8">
     Event.observe(document, 'dom:loaded', function() {
       // Some test code
-      $('testElements').tipSection({ });
+      $('testElements').tipSection();
+      $('instructions').makeToolTip({ elementCursor: 'default' });
     });
   </script>
 </head>
@@ -36,7 +39,7 @@
 
   <h1>Tool Tip Test</h1>
   
-  <h2>Hover over one of the links.</h2>
+  <h2 id="instructions" title="Why are you hovering over this? I said hover over the links.">Hover over one of the links.</h2>
   
   <ul id="testElements">
     <li><a href="#red" title="This is the red link">Red</a></li>

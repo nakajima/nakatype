@@ -4,29 +4,63 @@ Prototype.js extensions.
 
 h2. Contents
 
-h3. "Benchmark.js":http://github.com/nakajima/nakatype/wikis/benchmark-js
+h3. Tool Tips
 
-Ruby-esque benchmarking with Firebug.
+Easy tooltips. 'Nuff said.
 
-h3. "Custom event for hash:changed":http://github.com/nakajima/nakatype/wikis/custom-event-for-hash-changed
+wiki: "http://github.com/nakajima/nakatype/wikis/tool-tips":http://github.com/nakajima/nakatype/wikis/tool-tips
+
+example: "http://patnakajima.com/public/nakatype/test/functional/tool_tip_test.html":http://patnakajima.com/public/nakatype/test/functional/tool_tip_test.html
+
+h3. Custom event for hash:changed
 
 Fires a custom Prototype event named @hash:changed@ when the window location hash fragment changes.
 
-h3. "Better Edit in Place":http://github.com/nakajima/nakatype/wikis/better-edit-in-place-editable-js
+wiki: "http://github.com/nakajima/nakatype/wikis/custom-event-for-hash-changed":http://github.com/nakajima/nakatype/wikis/custom-event-for-hash-changed
+
+example: "http://patnakajima.com/public/nakatype/test/functional/hash_changed_test.html":http://patnakajima.com/public/nakatype/test/functional/hash_changed_test.html
+
+h3. Evented AJAX Callbacks
+
+Fires events for primary AJAX request callbacks.
+
+h3. Benchmark.js
+
+Ruby-esque benchmarking with Firebug.
+
+wiki: "http://github.com/nakajima/nakatype/wikis/benchmark-js":http://github.com/nakajima/nakatype/wikis/benchmark-js
+
+h3. Better Edit in Place
 
 A better edit in place script than the standard script.aculo.us solution.
 
-h3. "Element controls":http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
+wiki: "http://github.com/nakajima/nakatype/wikis/better-edit-in-place-editable-js":http://github.com/nakajima/nakatype/wikis/better-edit-in-place-editable-js
+
+example: _coming soon_
+
+h3. Element Methods
+
+Extensions for elements using Prototype's @Element.addMethods@ function.
+
+h3. Element controls
 
 Create elements that control elements.
 
-h3. "Classy Controls":http://github.com/nakajima/nakatype/wikis/classy-controls-classy-js
+wiki: "http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js":http://github.com/nakajima/nakatype/wikis/element-controls-element_controls-js
+
+example: _coming soon_
+
+h3. Classy Controls
 
 Simple class-based behaviors.
 
-h3. "Callbacks":http://github.com/nakajima/nakatype/wikis/callbacks
+wiki: "http://github.com/nakajima/nakatype/wikis/classy-controls-classy-js":http://github.com/nakajima/nakatype/wikis/classy-controls-classy-js
+
+h3. Callbacks
 
 Add before/after callbacks for any method for any object.
+
+wiki: "http://github.com/nakajima/nakatype/wikis/callbacks":http://github.com/nakajima/nakatype/wikis/callbacks
 
 h3. Event Delegation & Form Submission Event Bubbling Simulator
 
