@@ -26,18 +26,18 @@ var GlowingElement = Class.create({
     this.element.observe('mouse:leave', this.behaviors['stop']);
     
     this.behaviors['illuminate'] = (function(target) {
-      return function(i) {
-        target.element.setStyle('text-shadow: 0px 0px ' + (target.illumination * i) + 'px #aaaaaa');
+      return Prototype.Browser.Gecko ?  (Prototype.K) : function(i) {
+        target.element.setStyle('text-shadow: 0px 0px ' + (target.illumination * i) + 'px #076796');
         return i;
-      }
+      };
     })(this);
     
     this.behaviors['deluminate'] = (function(target) {
-      return function(i) {
-        target.element.style['text-shadow'] = '0px 0px ' + (target.illumination - (target.illumination * i)) + 'px #aaaaaa';
-        // target.element.setStyle('text-shadow: 0px 0px ' + (target.illumination - (target.illumination * i)) + 'px #aaaaaa');
+      return Prototype.Browser.Gecko ? (Prototype.K) : function(i) {
+        target.element.style['text-shadow'] = '0px 0px ' + (target.illumination - (target.illumination * i * 2)) + 'px #076796';
+        target.element.style['cursor'] = 'pointer';
         return i;
-      }
+      };
     })(this);
   },
   
