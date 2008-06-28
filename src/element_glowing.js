@@ -3,8 +3,9 @@ var GlowingElement = Class.create({
   afterGlow: .2, // Delay before element fades back to original color
   glowSpeed: .2, // Duration of glow transition
   fadeSpeed: .4, // Duration of de-glow transition
-  illumination: 8,
-  
+  haloColor: '#aaa', // Color of letter halo effect (no Gecko)
+  haloRadius: 12, // Size of letter halo effect in pixels
+   
   initialize: function(element, options) {
     this.element = $(element);
     this.options = options || { };
@@ -27,14 +28,14 @@ var GlowingElement = Class.create({
     
     this.behaviors['illuminate'] = (function(target) {
       return Prototype.Browser.Gecko ?  (Prototype.K) : function(i) {
-        target.element.setStyle('text-shadow: 0px 0px ' + (target.illumination * i) + 'px #076796');
+        target.element.setStyle('text-shadow: 0px 0px ' + (target.haloRadius * i) + 'px ' + target.haloColor);
         return i;
       };
     })(this);
     
     this.behaviors['deluminate'] = (function(target) {
       return Prototype.Browser.Gecko ? (Prototype.K) : function(i) {
-        target.element.style['text-shadow'] = '0px 0px ' + (target.illumination - (target.illumination * i * 2)) + 'px #076796';
+        target.element.style['text-shadow'] = '0px 0px ' + (target.haloRadius - (target.haloRadius * i * 2)) + 'px ' + target.haloColor;
         target.element.style['cursor'] = 'pointer';
         return i;
       };
