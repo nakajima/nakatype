@@ -2,6 +2,8 @@ h1. Nakatype.js
 
 Prototype.js extensions.
 
+<p style="background: red; color: white; padding: 1em;">Demos are down for a bit. If you want to try something, download the package and look in the functional tests directory</p>
+
 h2. Contents
 
 h3. Tool Tips
