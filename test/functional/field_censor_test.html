@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Field Censor Test</title>
+	<style type="text/css" media="screen">
+	  body { font-family: Helvetica, Arial, sans-serif; }
+	</style>
+	<script src="../vendor/prototype.js" type="text/javascript"></script>
+  <script src="../../src/field_censors.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    Event.observe(document, 'dom:loaded', function() {
+      $('text_field').censor('jquery', 'dojo', 'mootools');
+      $('text_area').censor('python', 'perl');
+      
+      $(document).observe('field:censored', function(event) {
+        var terms = event.memo.terms;
+        var li = new Element('li').update('Censored term used: ' + terms.join(', '));
+        $('transgressions').insert(li);
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <h1>Field Censor Test</h1>
+  
+  <label for="text_field">Text Field</label>
+  <input type="text" name="text_field" id="text_field">
+  
+  <br>
+  
+  <label for="text_area">Text Area</label>
+  <textarea id="text_area" name="text_area"></textarea>
+  
+  <h4>Transgressions:</h4>
+  <ul id="transgressions">
+    
+  </ul>
+  
+</body>
+</html>
