@@ -28,8 +28,9 @@ Object.extend(String.prototype, {
     return this.titleize().without(/\s/).uncapitalize();
   },
   
-	// Adds "s" if num > 1 or equals 0
-	pluralize: function(num) {
-	  return (num == 1) ? this : (this + 's');
-	}
+  // Adds "s" if num > 1 or equals 0
+  pluralize: function(num, alt) {
+    if (num == 1) { return this; }
+    else { return alt ? alt : (this + 's'); }
+  }
 });
