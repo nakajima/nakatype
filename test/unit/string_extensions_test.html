@@ -66,6 +66,12 @@ new Test.Unit.Runner({
     var correctResult = 'I wish I had autotest';
     var badString = "I don't wish I had autotest";
     this.assertEqual(correctResult, badString.without(/\s?don\'t/));
+  },
+  
+  testShouldPluralize: function() {
+    this.assertEqual('users', 'user'.pluralize(2));
+    this.assertEqual('users', 'user'.pluralize(0));
+    this.assertEqual('user', 'user'.pluralize(1));
   }
 });
   
