@@ -1,3 +1,18 @@
+// Make elements glow when you hover over them. Usage:
+//   
+//   document.observe('dom:loaded', function() {
+//     $$('.make-me-glow').addGlow();
+//   });
+//   
+// You can also customize certain options:
+// 
+//   $$('.make-me-glow').addGlow({
+//     glowColor: '#00f',
+//     afterGlow: 1
+//   });
+//
+// Note that this only works in Safari and other browsers that support
+// the text-shadow CSS attribute.
 var GlowingElement = Class.create({
   glowColor: '#fff', // Element glows to this color
   afterGlow: .2, // Delay before element fades back to original color
